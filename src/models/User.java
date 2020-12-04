@@ -1,5 +1,5 @@
 package models;
-// 客户信息
+// 员工信息
 public class User {
     private int empID;          //用户id
     private String userName;    //用户名

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/query")
-    public User queryUser(@RequestParam(value = "username") String username) {
+    public List<User> queryUser(@RequestParam(value = "username") String username) {
         return userServiceImp.queryUser(username);
     }
 
@@ -42,4 +44,9 @@ public class UserController {
         return userServiceImp.updateUser(user);
     }
 
+    @ResponseBody
+    @RequestMapping("/all")
+    public List<User> queryUsers() {
+        return this.userServiceImp.queryUsers();
+    }
 }

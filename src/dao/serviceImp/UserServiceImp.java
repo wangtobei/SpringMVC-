@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,17 +21,21 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User queryUser(String username) {
+    public List<User> queryUser(String username) {
         RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
         String sql = "select * from \"User\" where \"userName\" = ?";
-        User user = this.jdbcTemplate.queryForObject(sql, rowMapper, username);
-        return user;
+        try {
+            List<User> user = this.jdbcTemplate.query(sql, rowMapper, username);
+            return user;
+        }catch (Exception e){
+        }
+        return new ArrayList();
     }
 
     @Override
     public List<User> queryUsers() {
         RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
-        String sql = "select * from \"User\" where \"userName\" = ?";
+        String sql = "select * from \"User\"";
         return this.jdbcTemplate.query(sql, rowMapper);
     }
 
@@ -42,7 +47,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public boolean updateUser(User user) {
-        String sql = "update set \"userName\"=?,\"passWord\"=?,\"empPost\"=?,\"phone\"=?,\"privilege\"=? where \"empID\"=?";
+        String sql = "update \"User\" set \"userName\"=?,\"passWord\"=?,\"empPost\"=?,\"phone\"=?,\"privilege\"=? where \"empID\"=?";
         Object[] obj = new Object[]{
                 user.getUserName(),
                 user.getPassWord(),

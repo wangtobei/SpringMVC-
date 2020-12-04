@@ -25,8 +25,8 @@ public class PurchaseMapper implements RowMapper<Purchase> {
         product.setName(resultSet.getString("name"));
         product.setPrice(resultSet.getFloat("price"));
         product.setStockNum(resultSet.getInt("stockNum"));
-        product.setStockNum(resultSet.getInt("salarmNum"));
-        product.setId(resultSet.getInt("supId"));
+        product.setSalarmNum(resultSet.getInt("salarmNum"));
+        product.setSupId(resultSet.getInt("supId"));
         //purchase
         Purchase purchase = new Purchase();
         purchase.setPcID(resultSet.getInt("pcID"));

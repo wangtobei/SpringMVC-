@@ -1,6 +1,6 @@
 package pojo;
 
-public class Purchasepjo {
+public class Purchasepojo {
     private int pcID;//进货单单号
     private int pid;//购买的产品   db int pid
     private int sid;//供货商    db int sid

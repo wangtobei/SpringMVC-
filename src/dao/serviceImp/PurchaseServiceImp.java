@@ -27,7 +27,6 @@ public class PurchaseServiceImp implements PurchaseService {
     @Override
     public List<Purchase> queryPurchase() {
         String sql = "select * from \"Purchase\",\"Product\",\"Supplier\" where \"pid\"= \"Product\".\"id\" and \"sid\"=\"supID\"";
-        RowMapper<Purchase> rowMapper = new BeanPropertyRowMapper<>(Purchase.class);
         return this.jdbcTemplate.query(sql, new PurchaseMapper());
     }
 

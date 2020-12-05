@@ -28,9 +28,9 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public List<Customer> queryCustomersByName(String name) {
-        String sql = "select * from \"Customer\" where name like  '%'||?||'%'";
+        String sql = "select * from \"Customer\" where \"name\" like  '%'||?||'%'";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        return this.jdbcTemplate.query(sql, rowMapper);
+        return this.jdbcTemplate.query(sql, rowMapper,name);
     }
 
     @Override

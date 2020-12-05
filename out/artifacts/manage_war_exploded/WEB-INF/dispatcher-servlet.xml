@@ -7,12 +7,26 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context.xsd
-           http://www.springframework.org/schema/mvc
- http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+         http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="Controller"/>
-    <context:component-scan base-package="test"/>
     <mvc:annotation-driven/>
     <mvc:interceptors>
-        <bean class="config.Interceptor" />
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="config.Interceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/customer/**"/>
+            <mvc:mapping path="/product/**"/>
+            <mvc:mapping path="/purchase/**"/>
+            <mvc:mapping path="/sale/**"/>
+            <mvc:mapping path="/supplier/**"/>
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/login" />
+            <mvc:exclude-mapping path="/logout" />
+            <mvc:exclude-mapping path="/check" />
+            <bean class="config.LoginInterceptor "/>
+        </mvc:interceptor>
     </mvc:interceptors>
 </beans>

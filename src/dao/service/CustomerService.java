@@ -10,4 +10,6 @@ public interface CustomerService {
     public boolean addCustomer(Customer customer);
     public boolean deleteCustomer(int id);
     public boolean updateCustomer(Customer customer);
+    public List<Customer> queryPage(int beginPage,int preSize);
+    public int queryAllCount();
 }

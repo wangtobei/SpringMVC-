@@ -30,7 +30,7 @@ public class CustomerServiceImp implements CustomerService {
     public List<Customer> queryCustomersByName(String name) {
         String sql = "select * from \"Customer\" where \"name\" like  '%'||?||'%'";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
-        return this.jdbcTemplate.query(sql, rowMapper,name);
+        return this.jdbcTemplate.query(sql, rowMapper, name);
     }
 
     @Override
@@ -60,5 +60,18 @@ public class CustomerServiceImp implements CustomerService {
                 customer.getCid()
         };
         return this.jdbcTemplate.update(sql, obj) > 0;
+    }
+
+    @Override
+    public List<Customer> queryPage(int beginPage, int preSize) {
+        String sql = "SELECT * FROM \"Customer\" WHERE ROWNUM<? minus SELECT * FROM \"Customer\" WHERE ROWNUM<?";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        return this.jdbcTemplate.query(sql, rowMapper, beginPage * preSize + 1, (beginPage - 1) * preSize+1);
+    }
+
+    @Override
+    public int queryAllCount() {
+        String sql = "select count(*) from \"Customer\"";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
 }

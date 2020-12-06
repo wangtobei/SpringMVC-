@@ -51,4 +51,16 @@ public class CustomController {
     public boolean updateCustomer(Customer customer) {
         return this.customerServiceImp.updateCustomer(customer);
     }
+
+    @RequestMapping("/count")
+    @ResponseBody
+    public int queryAllCount() {
+        return this.customerServiceImp.queryAllCount();
+    }
+
+    @RequestMapping("/page")
+    @ResponseBody
+    public List<Customer> queryCustomerByPage(@RequestParam int page, @RequestParam int size) {
+        return this.customerServiceImp.queryPage(page, size);
+    }
 }

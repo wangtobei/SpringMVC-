@@ -45,19 +45,31 @@ public class LoginController {
         session.invalidate();
         return true;
     }
+
     @RequestMapping("/check")
     @ResponseBody
-    public boolean is_login(HttpServletRequest request){
-        HttpSession session=request.getSession();
-        User user= (User) session.getAttribute("USER_SESSION");
-        if (user!=null){
+    public boolean is_login(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("USER_SESSION");
+        if (user != null) {
             System.out.println("login success");
             return true;
-        }
-        else
-        {
+        } else {
             System.out.println("not login");
             return false;
+        }
+    }
+
+    @RequestMapping("/privilege")
+    @ResponseBody
+    public int Privilege(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("USER_SESSION");
+        if (user != null) {
+            return user.getPrivilege();
+        } else {
+            System.out.println("not login");
+            return 0;
         }
     }
 }

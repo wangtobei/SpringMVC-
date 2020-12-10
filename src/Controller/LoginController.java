@@ -26,6 +26,9 @@ public class LoginController {
     public boolean Login(@ModelAttribute User user, HttpSession httpSession) {
         String name = user.getUserName();
         String password = user.getPassWord();
+        List<User> user1 = this.userServiceImp.queryUser(name);
+        System.out.println(user);
+        System.out.println(user1);
         try {
             List<User> users = this.userServiceImp.queryUser(name);
             if (password.equals(users.get(0).getPassWord())) {

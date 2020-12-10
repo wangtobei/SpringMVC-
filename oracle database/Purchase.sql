@@ -69,6 +69,6 @@ end addpurchase_add_product;
 /
 CREATE TRIGGER "SYSTEM"."INSERT_PURCHASE_AUTOINC" BEFORE INSERT ON "SYSTEM"."Purchase" REFERENCING OLD AS "OLD" NEW AS "NEW" FOR EACH ROW 
 begin
-SELECT supplier_autoinc.nextval INTO :new."pcID" FROM dual;
+SELECT purchase_autoinc.nextval INTO :new."pcID" FROM dual;
 end insert_purchase_autoinc;
 /
